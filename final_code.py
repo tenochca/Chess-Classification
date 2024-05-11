@@ -11,12 +11,7 @@ from sklearn import metrics
 from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import RandomUnderSampler
 from collections import Counter
-import tensorflow as tf
-from tensorflow import keras
-from keras.models import Sequential
-from keras.layers import Activation, Dense
-from keras.optimizers import Adam
-from keras.metrics import categorical_crossentropy
+
 
 #NOTE a lot of this code is borrowed from the template and previous assignments. 
 
@@ -309,17 +304,4 @@ if gradient_boost == 1 and grid_search == 1:
     print("Gradient Boosting AUC: ", metrics.roc_auc_score(target_test, grid.predict_proba(data_test)[:,1]))                  
 
 #-----------------------------------------------------------------------------------------#
-
-if keras == 1:
-    target_train = np.array(target_train)
-    data_train_np = np.array(data_train)
-
-    model = Sequential([
-        Dense(units=20, input_shape = (17114, 18), activation = 'relu'),
-        Dense(units = 50, activation = 'relu'),
-        Dense(units = 2, activation = 'softmax')
-    ])
-
-    model.compile(optimizer = Adam(learning_rate = 0.01), loss = 'sparse_categorical_crossetropy', metrics = ['accuracy'])
-    model.fit(x = data_train, y = target_train, batch_size = 300, epochs = 10, verbose = 2 )
 
